@@ -7,25 +7,24 @@ import {
   afterAll
 } from "matchstick-as/assembly/index"
 import { Address, BigInt } from "@graphprotocol/graph-ts"
-import { Approval } from "../generated/schema"
-import { Approval as ApprovalEvent } from "../generated/AXSToken/AXSToken"
-import { handleApproval } from "../src/axs-token"
-import { createApprovalEvent } from "./axs-token-utils"
+import { AdminChanged } from "../generated/schema"
+import { AdminChanged as AdminChangedEvent } from "../generated/SmoothLovePotion/SmoothLovePotion"
+import { handleAdminChanged } from "../src/smooth-love-potion"
+import { createAdminChangedEvent } from "./smooth-love-potion-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
 
 describe("Describe entity assertions", () => {
   beforeAll(() => {
-    let _owner = Address.fromString(
+    let _oldAdmin = Address.fromString(
       "0x0000000000000000000000000000000000000001"
     )
-    let _spender = Address.fromString(
+    let _newAdmin = Address.fromString(
       "0x0000000000000000000000000000000000000001"
     )
-    let _value = BigInt.fromI32(234)
-    let newApprovalEvent = createApprovalEvent(_owner, _spender, _value)
-    handleApproval(newApprovalEvent)
+    let newAdminChangedEvent = createAdminChangedEvent(_oldAdmin, _newAdmin)
+    handleAdminChanged(newAdminChangedEvent)
   })
 
   afterAll(() => {
@@ -35,27 +34,21 @@ describe("Describe entity assertions", () => {
   // For more test scenarios, see:
   // https://thegraph.com/docs/en/developer/matchstick/#write-a-unit-test
 
-  test("Approval created and stored", () => {
-    assert.entityCount("Approval", 1)
+  test("AdminChanged created and stored", () => {
+    assert.entityCount("AdminChanged", 1)
 
     // 0xa16081f360e3847006db660bae1c6d1b2e17ec2a is the default address used in newMockEvent() function
     assert.fieldEquals(
-      "Approval",
+      "AdminChanged",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "_owner",
+      "_oldAdmin",
       "0x0000000000000000000000000000000000000001"
     )
     assert.fieldEquals(
-      "Approval",
+      "AdminChanged",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "_spender",
+      "_newAdmin",
       "0x0000000000000000000000000000000000000001"
-    )
-    assert.fieldEquals(
-      "Approval",
-      "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "_value",
-      "234"
     )
 
     // More assert options:

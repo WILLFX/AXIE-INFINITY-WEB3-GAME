@@ -1,0 +1,25 @@
+type Transfer @entity {
+  id: ID!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt!
+  contract: String!
+  timestamp: BigInt!
+}
+
+type Approval @entity {
+  id: ID!
+  owner: Bytes!
+  spender: Bytes!
+  value: BigInt!
+  contract: String!
+  timestamp: BigInt!
+}
+
+type Minter @entity {
+  id: ID!
+  address: Bytes!
+  contract: String!
+  added: Boolean!
+  timestamp: BigInt!
+}

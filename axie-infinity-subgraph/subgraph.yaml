@@ -5,25 +5,37 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: AXSToken
+    name: SmoothLovePotion
     network: mainnet
     source:
-      address: "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b"
-      abi: AXSToken
-      startBlock: 12314534
+      address: "0xcc8fa225d80b9c7d42f96e9570156c65d6caaa25"
+      abi: SmoothLovePotion
+      startBlock: 12314545
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
+        - AdminChanged
+        - AdminRemoved
         - Approval
+        - MinterAdded
+        - MinterRemoved
         - Transfer
       abis:
-        - name: AXSToken
-          file: ./abis/AXSToken.json
+        - name: SmoothLovePotion
+          file: ./abis/SmoothLovePotion.json
       eventHandlers:
+        - event: AdminChanged(indexed address,indexed address)
+          handler: handleAdminChanged
+        - event: AdminRemoved(indexed address)
+          handler: handleAdminRemoved
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
+        - event: MinterAdded(indexed address)
+          handler: handleMinterAdded
+        - event: MinterRemoved(indexed address)
+          handler: handleMinterRemoved
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/axs-token.ts
+      file: ./src/smooth-love-potion.ts
