@@ -1,0 +1,31 @@
+{
+  "name": "axie-infinity-subgraph",
+  "version": "1.0.0",
+  "description": "A subgraph to track Axie Infinity token transfers, approvals, and minter events.",
+  "main": "index.js",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --studio axie-infinity",
+    "test": "echo \"No test specified\""
+  },
+  "keywords": [
+    "axie-infinity",
+    "subgraph",
+    "blockchain",
+    "ethereum",
+    "graph-protocol",
+    "axs",
+    "slp",
+    "nft",
+    "gaming",
+    "web3"
+  ],
+  "author": "WILLFX",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.11.8",
+    "@graphprotocol/graph-ts": "^0.35.1",
+    "graphql": "^16.9.0"
+  }
+}

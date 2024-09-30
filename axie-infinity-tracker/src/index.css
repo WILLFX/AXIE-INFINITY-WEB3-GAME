@@ -1,0 +1,155 @@
+/* index.css */
+
+/* General styling for the app container */
+.App {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  background-image: url('./assets/axie-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+/* Styling for the header */
+h1 {
+  text-align: center;
+  color: #fdfdfd;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  font-size: 2.5vw; /* Adjust font size relative to viewport width */
+}
+
+/* Styling for the leaderboard table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+table th, table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.2vw; /* Adjust font size for responsiveness */
+}
+
+table th {
+  background-color: rgba(76, 175, 80, 0.9);
+  color: white;
+}
+
+table tr:hover {
+  background-color: rgba(241, 241, 241, 0.8);
+}
+
+a {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Styling for the contextual information section */
+.game-info {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  color: #fdfdfd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1.5vw; /* Adjust font size for responsiveness */
+}
+
+.game-info h2 {
+  color: #fdfdfd;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+}
+
+.game-info p {
+  color: #f1f1f1;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Toggle button for player details */
+.toggle-button {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.toggle-button:hover {
+  background-color: #45a049;
+}
+
+/* Expanded details section */
+.details-section {
+  background-color: rgba(249, 249, 249, 0.9);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure text visibility */
+p, th, td {
+  color: #333;
+  font-weight: bold;
+}
+
+/* Background image styling */
+body {
+  background: url('./assets/axie-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Add box shadow to elements */
+table, .game-info, .details-section {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive styles using media queries */
+@media (max-width: 768px) {
+  /* Adjust font sizes for smaller screens */
+  h1 {
+    font-size: 5vw;
+  }
+
+  table th, table td {
+    font-size: 2.5vw;
+  }
+
+  .game-info {
+    font-size: 2.5vw;
+  }
+
+  /* Stack table elements vertically for very small screens */
+  table, tbody, tr, td, th {
+    display: block;
+  }
+
+  /* Adjust table rows for small screens */
+  tr {
+    margin-bottom: 15px;
+  }
+
+  /* Adjust the avatar image size */
+  img {
+    width: 20vw;
+    height: 20vw;
+  }
+}

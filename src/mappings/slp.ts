@@ -1,33 +1,48 @@
-import { Transfer, Approval, Minter } from "../generated/schema";
+import { Transfer, Minter, Player } from "../../generated/schema";
+import { BigInt, Bytes } from "@graphprotocol/graph-ts"; // Add Bytes import here
 import {
   Transfer as TransferEvent,
-  Approval as ApprovalEvent,
   MinterAdded as MinterAddedEvent,
   MinterRemoved as MinterRemovedEvent
-} from "../generated/SLP/SLP";
+} from "../../generated/SLP/SLP";
 
 export function handleTransfer(event: TransferEvent): void {
-  let transfer = new Transfer(event.transaction.hash.toHex());
-  transfer.from = event.params._from;
-  transfer.to = event.params._to;
+  // Create or load the 'from' player
+  let playerFrom = Player.load(event.params._from.toHex());
+  if (!playerFrom) {
+    playerFrom = new Player(event.params._from.toHex());
+    playerFrom.totalTransferred = BigInt.fromI32(0);
+  }
+
+  // Create or load the 'to' player
+  let playerTo = Player.load(event.params._to.toHex());
+  if (!playerTo) {
+    playerTo = new Player(event.params._to.toHex());
+    playerTo.totalTransferred = BigInt.fromI32(0);
+  }
+
+  // Update totalTransferred for the 'from' player
+  playerFrom.totalTransferred = playerFrom.totalTransferred.plus(event.params._value);
+  playerFrom.save();
+
+  // Update totalTransferred for the 'to' player
+  playerTo.totalTransferred = playerTo.totalTransferred.plus(event.params._value);
+  playerTo.save();
+
+  // Save the transfer entity
+  let transfer = new Transfer(event.transaction.hash.toHex() + '-' + event.logIndex.toString());
+  transfer.from = Bytes.fromHexString(playerFrom.id) as Bytes;
+  transfer.to = Bytes.fromHexString(playerTo.id) as Bytes;
+  
   transfer.value = event.params._value;
-  transfer.contract = "SLP";
+  transfer.contract = "SLP"; // or "SLP" in slp.ts
   transfer.timestamp = event.block.timestamp;
   transfer.save();
-}
-
-export function handleApproval(event: ApprovalEvent): void {
-  let approval = new Approval(event.transaction.hash.toHex());
-  approval.owner = event.params._owner;
-  approval.spender = event.params._spender;
-  approval.value = event.params._value;
-  approval.contract = "SLP";
-  approval.timestamp = event.block.timestamp;
-  approval.save();
+  
 }
 
 export function handleMinterAdded(event: MinterAddedEvent): void {
-  let minter = new Minter(event.transaction.hash.toHex());
+  let minter = new Minter(event.transaction.hash.toHex() + '-' + event.logIndex.toString());
   minter.address = event.params._minter;
   minter.contract = "SLP";
   minter.added = true;
@@ -36,7 +51,7 @@ export function handleMinterAdded(event: MinterAddedEvent): void {
 }
 
 export function handleMinterRemoved(event: MinterRemovedEvent): void {
-  let minter = new Minter(event.transaction.hash.toHex());
+  let minter = new Minter(event.transaction.hash.toHex() + '-' + event.logIndex.toString());
   minter.address = event.params._minter;
   minter.contract = "SLP";
   minter.added = false;

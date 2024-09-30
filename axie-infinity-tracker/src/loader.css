@@ -1,0 +1,20 @@
+/* Loader.css */
+
+.loader-container {
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: rgba(0, 0, 0, 0.7); /* Optional: a semi-transparent background */
+    z-index: 9999; /* Make sure it stays on top */
+  }
+  
+  .loader-gif {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  

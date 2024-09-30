@@ -1,0 +1,51 @@
+specVersion: 0.0.4
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: AXS
+    network: mainnet
+    source:
+      address: "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b"
+      abi: AXS
+      startBlock: 20855811
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+        - Player
+      abis:
+        - name: AXS
+          file: AXS\AXS.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: AXS\AXS.wasm
+  - kind: ethereum/contract
+    name: SLP
+    network: mainnet
+    source:
+      address: "0xcc8fa225d80b9c7d42f96e9570156c65d6caaa25"
+      abi: SLP
+      startBlock: 20855735
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+        - Minter
+        - Player
+      abis:
+        - name: SLP
+          file: SLP\SLP.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: MinterAdded(indexed address)
+          handler: handleMinterAdded
+        - event: MinterRemoved(indexed address)
+          handler: handleMinterRemoved
+      file: SLP\SLP.wasm
