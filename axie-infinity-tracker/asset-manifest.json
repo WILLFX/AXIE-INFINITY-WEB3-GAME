@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ada3d5d4.css",
+    "main.js": "/static/js/main.74ec7197.js",
+    "static/media/axie-background.jpg": "/static/media/axie-background.e80d4821c4207905cba0.jpg",
+    "index.html": "/index.html",
+    "main.ada3d5d4.css.map": "/static/css/main.ada3d5d4.css.map",
+    "main.74ec7197.js.map": "/static/js/main.74ec7197.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ada3d5d4.css",
+    "static/js/main.74ec7197.js"
+  ]
+}
